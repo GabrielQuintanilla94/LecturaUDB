@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LecturaUDB.Models.TopLibroViewModel>
+
+@{
+    ViewBag.Title = "Top 5 Libros Mejor Calificados";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Portada</th>
+            <th>Posición</th>
+            <th>Portada</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Género</th>
+            <th>Promedio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="6">No hay datos disponibles.</td></tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Posicion == 1)
+                        {<span>🥇</span> }
+                        else if (item.Posicion == 2)
+                        { <span>🥈</span> }
+                        else if (item.Posicion == 3)
+                        { <span>🥉</span> }
+                        else
+                        { @item.Posicion}
+                    </td>
+                    <td>
+                        <img src="~/portadas/@item.PortadaUrl" width="80" height="120" alt="Portada de @item.Titulo" />
+                    </td>
+                    <td>@item.Titulo</td>
+                    <td>@item.Autor</td>
+                    <td>@item.Genero</td>
+                    <td>@Math.Round(item.Promedio, 2)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("← Volver al listado", "Index", "Libros", null, new { @class = "btn btn-primary" })
+</p>

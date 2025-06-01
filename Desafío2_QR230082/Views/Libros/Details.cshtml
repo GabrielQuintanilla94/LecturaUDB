@@ -1,0 +1,38 @@
+﻿@model LecturaUDB.Models.Libro
+
+@{ ViewBag.Title = "Detalles del Libro"; }
+
+<h2>@Model.Titulo</h2>
+
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+    <div>
+        <img src="~/portadas/@Model.PortadaUrl" alt="@Model.Titulo" width="150" height="220" />
+    </div>
+    <div>
+        <p><strong>Autor:</strong> @Model.Autor</p>
+        <p><strong>Género:</strong> @Model.Genero</p>
+        <p><strong>Sinopsis:</strong> @Model.Sinopsis</p>
+        <p><strong>Calificación promedio:</strong> @ViewBag.Promedio</p>
+
+        <hr />
+
+        <h4>Calificar este libro</h4>
+        <p>Selecciona una puntuación:</p>
+
+        @for (int i = 1; i <= 5; i++)
+        {
+<form method="post" action="@Url.Action("Calificar", "Libros")" style="display: inline-block;">
+    <input type="hidden" name="idLibro" value="@Model.Id" />
+    <input type="hidden" name="puntuacion" value="@i" />
+    <button type="submit" style="border: none; background: none; font-size: 24px; cursor: pointer;">
+        &#9733;
+    </button>
+</form>}
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Eliminar", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", onclick = "return confirm('¿Estás seguro de que deseas eliminar este libro?');" })
+    @Html.ActionLink("← Volver al listado", "Index")
+</p>

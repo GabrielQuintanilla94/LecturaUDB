@@ -1,0 +1,37 @@
+﻿@model LecturaUDB.Models.Libro
+
+@{ ViewBag.Title = "Delete"; }
+
+<h2>Eliminar Libro</h2>
+
+<h3>¿Estás seguro que deseas eliminar este libro?</h3>
+<div>
+    <h4>Libro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Titulo)</dt>
+        <dd>@Html.DisplayFor(model => model.Titulo)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Autor)</dt>
+        <dd>@Html.DisplayFor(model => model.Autor)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Genero)</dt>
+        <dd>@Html.DisplayFor(model => model.Genero)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Sinopsis)</dt>
+        <dd>@Html.DisplayFor(model => model.Sinopsis)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.PortadaUrl)</dt>
+        <dd>@Html.DisplayFor(model => model.PortadaUrl)</dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Libros", FormMethod.Post))
+    {
+@Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                                    @Html.ActionLink("Volver al listado", "Index")
+                                </div>}
+</div>
