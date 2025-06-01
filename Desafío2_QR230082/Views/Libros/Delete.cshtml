@@ -25,7 +25,7 @@
         <dd>@Html.DisplayFor(model => model.PortadaUrl)</dd>
     </dl>
 
-    @using (Html.BeginForm("DeleteConfirmed", "Libros", FormMethod.Post))
+    @using (Html.BeginForm("Delete", "Libros", FormMethod.Post))
     {
 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.Id)
